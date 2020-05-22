@@ -39,8 +39,10 @@ public class JogoDaVelha {
 		int status = -1;
 
 		// escreva seu codigo aqui
-				
-		
+		for (int i=0; i < tabuleiro.length; i++) {
+			for (int j=0; j < tabuleiro[i].length; j++)
+				if(tabuleiro[i][j] != 'O' || tabuleiro[i][j] != 'X') status = 0;
+		}		
 		
 		return status;
 	}
@@ -56,6 +58,7 @@ public class JogoDaVelha {
 		char[][] tab2 = {{'O','X','X'},{'X','O','O'},{' ',' ','O'}};
 		char[][] tab3 = {{'O','X','X'},{'X','O','O'},{'O','X','X'}};
 		char[][] tab4 = {{' ',' ',' '},{'X','O','X'},{' ',' ',' '}};
+
 
 		System.out.println("Status calculado: " + verificaStatus(tab0));
 		System.out.println("Status esperado para o tabuleiro0: 0\n");
