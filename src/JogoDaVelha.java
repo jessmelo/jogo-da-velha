@@ -59,19 +59,31 @@ public class JogoDaVelha {
 		}
 
 		boolean temPeca = false;
-		
+
 		for (int i=0; i < tabuleiro.length; i++) {
 			for (int j=0; j < tabuleiro[i].length; j++){
 				if(tabuleiro[i][j] == espacoVazio){
 					status = 0;
 				} else {
-					status = 3;
 					temPeca = true;
 				} 
 			} 
 		}		
 
-		if(status == 0 && temPeca) status = 4;
+		boolean temEspacoVazio = false;
+		if(status == 0 && temPeca) {
+			for (int i=0; i < tabuleiro.length; i++) {
+				for (int j=0; j < tabuleiro[i].length; j++){
+					if(tabuleiro[i][j] == espacoVazio){
+						temEspacoVazio = true;
+					} 
+				} 
+			}		
+		}
+
+		if(temEspacoVazio && temPeca) {
+			status = 4;
+		} else if(temPeca) status = 3;
 
 		return status;
 	}
@@ -98,6 +110,9 @@ public class JogoDaVelha {
 		char[][] tab5 = {{'X',' ',' '},{'O','X','X'},{' ',' ','X'}};
 		char[][] tab6 = {{' ',' ','X'},{'X','X','X'},{'X',' ',' '}};
 		char[][] tab7 = {{' ',' ','O'},{'X','O','X'},{'O',' ',' '}};
+		char[][] tab8 = {{' ',' ','O'},{'X','X','O'},{'O',' ','X'}};
+		char[][] tab9 = {{'O','X','O'},{'X','X','O'},{'O','O','X'}};
+		char[][] tab10 = {{' ',' ','O'},{'X','X','O'},{'O',' ','X'}};
 
 		System.out.println(tab4[1][0] + " | " + tab4[1][1] + " | " + tab4[1][2]);
 
@@ -132,6 +147,14 @@ public class JogoDaVelha {
 		imprimeJogo(tab7);
 		System.out.println("Status calculado: " + verificaStatus(tab7));
 		System.out.println("Status esperado para o tabuleiro4: 2\n");
+
+		imprimeJogo(tab8);
+		System.out.println("Status calculado: " + verificaStatus(tab8));
+		System.out.println("Status esperado para o tabuleiro4: 4\n");
+
+		imprimeJogo(tab9);
+		System.out.println("Status calculado: " + verificaStatus(tab9));
+		System.out.println("Status esperado para o tabuleiro9: 3\n");
 		
 	}
 }
