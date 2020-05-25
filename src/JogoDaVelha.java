@@ -38,15 +38,44 @@ public class JogoDaVelha {
 	static int verificaStatus(char[][] tabuleiro) {
 		int status = -1;
 
-		// escreva seu codigo aqui
 		for (int i=0; i < tabuleiro.length; i++) {
 			for (int j=0; j < tabuleiro[i].length; j++)
-				if(tabuleiro[i][j] != 'O' || tabuleiro[i][j] != 'X') status = 0;
+				if(tabuleiro[i][j] == espacoVazio){
+					status = 0;
+				} 
 		}		
 		
+		boolean diagX1 = tabuleiro[0][0] == pecaX && tabuleiro[1][1] == pecaX && tabuleiro[2][2] == pecaX;
+		boolean diagX2 = tabuleiro[0][2] == pecaX && tabuleiro[1][1] == pecaX && tabuleiro[2][0] == pecaX;
+
+		boolean diagO1 = tabuleiro[0][0] == pecaY && tabuleiro[1][1] == pecaY && tabuleiro[2][2] == pecaY;
+		boolean diagO2 = tabuleiro[0][2] == pecaY && tabuleiro[1][1] == pecaY && tabuleiro[2][0] == pecaY;
+
+		if(diagX1 || diagX2) {
+			return status = 1;
+		} else if(diagO1 || diagO2) {
+			return status = 2;
+		}
+
+		for(int i=0; i < 3; i++){
+			if(tabuleiro[i][0] == 'X' && tabuleiro[i][1] == 'X' && tabuleiro[i][2] == 'X'){
+				return status = 1;
+			} else if (tabuleiro[i][0] == 'O' && tabuleiro[i][1] == 'O' && tabuleiro[i][2] == 'O'){
+				return status = 2;
+			} 
+		}
+
 		return status;
 	}
 	
+	static void imprimeJogo(char[][] tabuleiro){
+		for (int i=0; i < tabuleiro.length; i++) {
+			for (int j=0; j < tabuleiro[i].length; j++) {
+				System.out.print(tabuleiro[i][j] + " | ");
+			}
+			System.out.println();
+		}
+	}
 	/*
 		Apenas para seus testes. ISSO SERA IGNORADO NA CORRECAO
 	*/
@@ -58,23 +87,43 @@ public class JogoDaVelha {
 		char[][] tab2 = {{'O','X','X'},{'X','O','O'},{' ',' ','O'}};
 		char[][] tab3 = {{'O','X','X'},{'X','O','O'},{'O','X','X'}};
 		char[][] tab4 = {{' ',' ',' '},{'X','O','X'},{' ',' ',' '}};
+		char[][] tab5 = {{'X',' ',' '},{'O','X','X'},{' ',' ','X'}};
+		char[][] tab6 = {{' ',' ','X'},{'X','X','X'},{'X',' ',' '}};
+		char[][] tab7 = {{' ',' ','O'},{'X','O','X'},{'O',' ',' '}};
 
+		System.out.println(tab4[1][0] + " | " + tab4[1][1] + " | " + tab4[1][2]);
 
+		imprimeJogo(tab0);
 		System.out.println("Status calculado: " + verificaStatus(tab0));
 		System.out.println("Status esperado para o tabuleiro0: 0\n");
 
+		imprimeJogo(tab1);
 		System.out.println("Status calculado: " + verificaStatus(tab1));
 		System.out.println("Status esperado para o tabuleiro1: 1\n");
 
+		imprimeJogo(tab2);
 		System.out.println("Status calculado: " + verificaStatus(tab2));
 		System.out.println("Status esperado para o tabuleiro2: 2\n");
 		
+		imprimeJogo(tab3);
 		System.out.println("Status calculado: " + verificaStatus(tab3));
 		System.out.println("Status esperado para o tabuleiro1: 3\n");
 		
+		imprimeJogo(tab4);
 		System.out.println("Status calculado: " + verificaStatus(tab4));
 		System.out.println("Status esperado para o tabuleiro4: 4\n");
-		
 
+		imprimeJogo(tab5);
+		System.out.println("Status calculado: " + verificaStatus(tab5));
+		System.out.println("Status esperado para o tabuleiro4: 1\n");
+
+		imprimeJogo(tab6);
+		System.out.println("Status calculado: " + verificaStatus(tab6));
+		System.out.println("Status esperado para o tabuleiro4: 1\n");
+		
+		imprimeJogo(tab7);
+		System.out.println("Status calculado: " + verificaStatus(tab7));
+		System.out.println("Status esperado para o tabuleiro4: 2\n");
+		
 	}
 }
