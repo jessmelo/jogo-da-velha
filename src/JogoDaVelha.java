@@ -37,13 +37,6 @@ public class JogoDaVelha {
 	*/
 	static int verificaStatus(char[][] tabuleiro) {
 		int status = -1;
-
-		for (int i=0; i < tabuleiro.length; i++) {
-			for (int j=0; j < tabuleiro[i].length; j++)
-				if(tabuleiro[i][j] == espacoVazio){
-					status = 0;
-				} 
-		}		
 		
 		boolean diagX1 = tabuleiro[0][0] == pecaX && tabuleiro[1][1] == pecaX && tabuleiro[2][2] == pecaX;
 		boolean diagX2 = tabuleiro[0][2] == pecaX && tabuleiro[1][1] == pecaX && tabuleiro[2][0] == pecaX;
@@ -58,12 +51,27 @@ public class JogoDaVelha {
 		}
 
 		for(int i=0; i < 3; i++){
-			if(tabuleiro[i][0] == 'X' && tabuleiro[i][1] == 'X' && tabuleiro[i][2] == 'X'){
+			if(tabuleiro[i][0] == pecaX && tabuleiro[i][1] == pecaX && tabuleiro[i][2] == pecaX){
 				return status = 1;
-			} else if (tabuleiro[i][0] == 'O' && tabuleiro[i][1] == 'O' && tabuleiro[i][2] == 'O'){
+			} else if (tabuleiro[i][0] == pecaY && tabuleiro[i][1] == pecaY && tabuleiro[i][2] == pecaY){
 				return status = 2;
 			} 
 		}
+
+		boolean temPeca = false;
+		
+		for (int i=0; i < tabuleiro.length; i++) {
+			for (int j=0; j < tabuleiro[i].length; j++){
+				if(tabuleiro[i][j] == espacoVazio){
+					status = 0;
+				} else {
+					status = 3;
+					temPeca = true;
+				} 
+			} 
+		}		
+
+		if(status == 0 && temPeca) status = 4;
 
 		return status;
 	}
