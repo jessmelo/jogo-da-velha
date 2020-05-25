@@ -38,6 +38,8 @@ public class JogoDaVelha {
 	static int verificaStatus(char[][] tabuleiro) {
 		int status = -1;
 		
+		// checando as diagonais
+
 		boolean diagX1 = tabuleiro[0][0] == pecaX && tabuleiro[1][1] == pecaX && tabuleiro[2][2] == pecaX;
 		boolean diagX2 = tabuleiro[0][2] == pecaX && tabuleiro[1][1] == pecaX && tabuleiro[2][0] == pecaX;
 
@@ -50,6 +52,8 @@ public class JogoDaVelha {
 			return status = 2;
 		}
 
+		// checando horizontal e vertical
+
 		for(int i=0; i < 3; i++){
 			if(tabuleiro[i][0] == pecaX && tabuleiro[i][1] == pecaX && tabuleiro[i][2] == pecaX){
 				return status = 1;
@@ -57,6 +61,8 @@ public class JogoDaVelha {
 				return status = 2;
 			} 
 		}
+
+		// outros casos
 
 		boolean temPeca = false;
 
@@ -82,20 +88,13 @@ public class JogoDaVelha {
 		}
 
 		if(temEspacoVazio && temPeca) {
+			// se tiver espaco vazio e nenhum ganhador, o jogo ainda está em andamento (status 4)
 			status = 4;
-		} else if(temPeca) status = 3;
+		} else if(temPeca) status = 3; // se tiver n tiver espaco vazio ou ganhador é empate (status 3)
 
 		return status;
 	}
 	
-	static void imprimeJogo(char[][] tabuleiro){
-		for (int i=0; i < tabuleiro.length; i++) {
-			for (int j=0; j < tabuleiro[i].length; j++) {
-				System.out.print(tabuleiro[i][j] + " | ");
-			}
-			System.out.println();
-		}
-	}
 	/*
 		Apenas para seus testes. ISSO SERA IGNORADO NA CORRECAO
 	*/
@@ -107,54 +106,21 @@ public class JogoDaVelha {
 		char[][] tab2 = {{'O','X','X'},{'X','O','O'},{' ',' ','O'}};
 		char[][] tab3 = {{'O','X','X'},{'X','O','O'},{'O','X','X'}};
 		char[][] tab4 = {{' ',' ',' '},{'X','O','X'},{' ',' ',' '}};
-		char[][] tab5 = {{'X',' ',' '},{'O','X','X'},{' ',' ','X'}};
-		char[][] tab6 = {{' ',' ','X'},{'X','X','X'},{'X',' ',' '}};
-		char[][] tab7 = {{' ',' ','O'},{'X','O','X'},{'O',' ',' '}};
-		char[][] tab8 = {{' ',' ','O'},{'X','X','O'},{'O',' ','X'}};
-		char[][] tab9 = {{'O','X','O'},{'X','X','O'},{'O','O','X'}};
-		char[][] tab10 = {{' ',' ','O'},{'X','X','O'},{'O',' ','X'}};
 
-		System.out.println(tab4[1][0] + " | " + tab4[1][1] + " | " + tab4[1][2]);
-
-		imprimeJogo(tab0);
 		System.out.println("Status calculado: " + verificaStatus(tab0));
 		System.out.println("Status esperado para o tabuleiro0: 0\n");
 
-		imprimeJogo(tab1);
 		System.out.println("Status calculado: " + verificaStatus(tab1));
 		System.out.println("Status esperado para o tabuleiro1: 1\n");
 
-		imprimeJogo(tab2);
 		System.out.println("Status calculado: " + verificaStatus(tab2));
 		System.out.println("Status esperado para o tabuleiro2: 2\n");
 		
-		imprimeJogo(tab3);
 		System.out.println("Status calculado: " + verificaStatus(tab3));
 		System.out.println("Status esperado para o tabuleiro1: 3\n");
 		
-		imprimeJogo(tab4);
 		System.out.println("Status calculado: " + verificaStatus(tab4));
 		System.out.println("Status esperado para o tabuleiro4: 4\n");
-
-		imprimeJogo(tab5);
-		System.out.println("Status calculado: " + verificaStatus(tab5));
-		System.out.println("Status esperado para o tabuleiro4: 1\n");
-
-		imprimeJogo(tab6);
-		System.out.println("Status calculado: " + verificaStatus(tab6));
-		System.out.println("Status esperado para o tabuleiro4: 1\n");
-		
-		imprimeJogo(tab7);
-		System.out.println("Status calculado: " + verificaStatus(tab7));
-		System.out.println("Status esperado para o tabuleiro4: 2\n");
-
-		imprimeJogo(tab8);
-		System.out.println("Status calculado: " + verificaStatus(tab8));
-		System.out.println("Status esperado para o tabuleiro4: 4\n");
-
-		imprimeJogo(tab9);
-		System.out.println("Status calculado: " + verificaStatus(tab9));
-		System.out.println("Status esperado para o tabuleiro9: 3\n");
 		
 	}
 }
